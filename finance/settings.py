@@ -80,13 +80,24 @@ WSGI_APPLICATION = 'finance.wsgi.application'
 #    }
 #}
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'tdnet',
+#        'USER': 'postgres',
+#        'PASSWORD': 'Baba1231',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tdnet',
-        'USER': 'postgres',
-        'PASSWORD': 'Baba1231',
-        'HOST': 'localhost',
+        'NAME': 'd28va6tu188rkb',
+        'USER': 'ivwwjvsugczjhx',
+        'PASSWORD': 'c4efcb2b286da43bcd7cf587642f61b16f8a13435c72eca1940571df665ce153',
+        'HOST': 'ec2-54-166-37-125.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
