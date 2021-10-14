@@ -1,0 +1,16 @@
+{% extends 'tdnet/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+<html>
+<body>
+    {% block content %}
+    {% if user.is_authenticated %}
+      Hi {{ user.username }}!
+      <p><a href="{% url 'logout' %}">ログアウト</a></p>
+    {% else %}
+      <a href="{% url 'login' %}">ログイン</a>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

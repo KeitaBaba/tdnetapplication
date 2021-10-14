@@ -1,0 +1,46 @@
+{% extends 'tdnet/base.html' %}
+{% block content %}
+<section class="hero is-fullheight">
+  <div class="hero-body">
+      <div class="container has-text-centered">
+          <div class="column is-4 is-offset-4">
+                <div class="box">
+                  <form action="{% url 'tdnet:create' %}" method="post">
+                    <div class="form-group">
+
+                      <div class="field">
+                        <label class="label">顧客名</label>
+                        <div class="control">
+                          <input class="input" type="text" name="customer" maxlength="200" required="" id="id_customer" placeholder="Strategic Capital">
+                        </div>
+                      </div>
+                      
+                      <div class="field">
+                        <label class="label">メールアドレス</label>
+                        <div class="control">
+                          <input class="input" type="email" name="customer_address" maxlength="200" id="id_customer_address" placeholder="sample@gmail.com">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">銘柄コード</label>
+                        <div class="control">
+                          <input class="input" id="code" name="code" placeholder="47550">
+                        </div>
+                      </div>
+
+                     
+
+                      <input type="submit" class="btn" value="登録">
+                      
+                      {% csrf_token %}
+                        
+                    </div>
+                  </form>
+                </div>
+          </div>
+      </div>
+    </div>
+</section>
+
+{% endblock %}

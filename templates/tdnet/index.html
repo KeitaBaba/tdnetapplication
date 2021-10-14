@@ -1,0 +1,40 @@
+{% extends 'tdnet/base.html' %}
+{% load static %}
+<html>
+  <head>
+    <link href="{% static 'test.css' %}" rel="stylesheet">
+  </head>
+
+<html>
+  <head>
+  </head>
+
+  {% block content %}
+  <body>
+  <h1 class="title">適時開示情報一覧</h1>
+  <form method="GET" action="{% url 'tdnet:index' %}">
+    <input type="text" name="keyword">
+    <button type="submit">検索</button>
+  </form>
+      <table>
+          <thead>
+              <tr>
+                  <th scope="col">コード</th>
+                  <th scope="col">会社名</th>
+                  <th scope="col">開示情報</th>
+                  <th scope="col">開示日時</th>
+              </tr>
+          </thead>
+          <tbody>
+             {% for item in tekijikaiji %}
+                <td>{{ item.code }}</td>
+                <td>{{ item.company_name }}</td>
+                <td><a href="{{item.pdf}}">{{item.company_title}}</a></td> 
+                <td>{{ item.disclosure_date }}</td>                         
+              </tr>
+             {% endfor %}
+        
+          </tbody>
+      </table>   
+    </body>
+{% endblock %}
