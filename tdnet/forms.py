@@ -9,5 +9,5 @@ class CustomerForm(forms.ModelForm):
 
 class CodeForm(forms.ModelForm):
     class Meta:
-        model = Code
-        fields = ('customer','code')
+      model = Code
+      fields = ('customer','code')

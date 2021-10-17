@@ -2,7 +2,7 @@ from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.views import generic
 from django.db.models import Q
-from.models import Code, Tekijikaiji,Customer
+from.models import Tekijikaiji,Customer,Code
 from .forms import CustomerForm,CodeForm
 import csv
 from django.contrib.auth.decorators import login_required
@@ -47,17 +47,15 @@ def customer_models(request):
     if customer_address=="" and  form2.is_valid():
         Code.objects.create(**form2.cleaned_data)
         return render(request, 'tdnet/create.html')
-        
-    elif code=="" and  form.is_valid():
+
+    if customer_address=="" and code=="":
+        return render(request, 'tdnet/error.html',{"error":"銘柄コードを入力してください"})
+
+    if code=="" and  form.is_valid():
         Customer.objects.create(**form.cleaned_data)
         return render(request, 'tdnet/create.html')
-        
-
-    else:
-        with open(csv_file_name+".csv", 'a',newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow([code])
-
-        if form.is_valid():
+    
+    if form.is_valid() and form2.is_valid():
             Customer.objects.create(**form.cleaned_data)
+            Code.objects.create(**form2.cleaned_data)
             return render(request, 'tdnet/create.html')  
