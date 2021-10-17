@@ -2,8 +2,8 @@ from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.views import generic
 from django.db.models import Q
-from.models import Tekijikaiji,Customer
-from .forms import CustomerForm
+from.models import Code, Tekijikaiji,Customer
+from .forms import CustomerForm,CodeForm
 import csv
 from django.contrib.auth.decorators import login_required
 
@@ -35,6 +35,7 @@ def new(request):
 @login_required
 def customer_models(request):
     form = CustomerForm(request.POST or None) 
+    form2 = CodeForm(request.POST or None) 
     code=request.POST.get('code')
     csv_file_name=request.POST.get('customer')
     customer_address=request.POST.get('customer_address')
@@ -43,16 +44,13 @@ def customer_models(request):
     if Customer.objects.filter(customer_address = customer_address):
         return render(request, "tdnet/error.html", {"error":"このユーザーは登録されています"})
     
-    if customer_address=="" :
-        with open(csv_file_name+".csv", 'a', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow([code])
-        
+    if customer_address=="" and  form2.is_valid():
+        Code.objects.create(**form2.cleaned_data)
         return render(request, 'tdnet/create.html')
         
-    elif code=="" and form.is_valid():
-            Customer.objects.create(**form.cleaned_data)
-            return render(request, 'tdnet/create.html')
+    elif code=="" and  form.is_valid():
+        Customer.objects.create(**form.cleaned_data)
+        return render(request, 'tdnet/create.html')
         
 
     else:

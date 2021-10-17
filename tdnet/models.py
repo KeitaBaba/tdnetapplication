@@ -21,4 +21,14 @@ class Customer(models.Model):
         db_table = 'customer'
 
 
+class Code(models.Model):
+    customer = models.TextField(blank=True, null=True)
+    code = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'code'
+
+
+
 
