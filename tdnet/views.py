@@ -5,6 +5,8 @@ from django.db.models import Q
 from.models import Tekijikaiji,Customer,Code
 from .forms import CustomerForm,CodeForm
 import csv
+from datetime import datetime,timedelta
+import datetime
 from django.contrib.auth.decorators import login_required
 
 class TopView(generic.TemplateView):
@@ -12,7 +14,12 @@ class TopView(generic.TemplateView):
 
 
 def index(request):
-    tekijikaiji=Tekijikaiji.objects.all()
+    td = timedelta(days=-30)
+    d = datetime.date.today()
+    date=td+d
+    one_month_ago=date.strftime('%Y%m%d')
+    
+    tekijikaiji=Tekijikaiji.objects.all().filter(disclosure_date__gt=one_month_ago).order_by('-disclosure_date')
     keyword = request.GET.get('keyword')
     if keyword:
        tekijikaiji = tekijikaiji.filter(
